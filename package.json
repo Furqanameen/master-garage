@@ -1,0 +1,26 @@
+{
+  "name": "mastermechanics-pern",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Master Mechanics Garage website – PostgreSQL + Express + React + Node (PERN)",
+  "scripts": {
+    "install:all": "npm install && npm --prefix server install && npm --prefix client install",
+    "setup": "npm run install:all && npm run db:init && npm run db:seed && npm run build",
+    "dev": "concurrently -n api,web -c blue,green \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "db:init": "npm --prefix server run db:init",
+    "db:seed": "npm --prefix server run db:seed",
+    "db:reset": "npm --prefix server run db:reset",
+    "media:download": "npm --prefix server run media:download",
+    "test:data": "npm --prefix server run test:data",
+    "db:create": "bash server/scripts/setup-db.sh",
+    "preflight": "npm --prefix server run preflight"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

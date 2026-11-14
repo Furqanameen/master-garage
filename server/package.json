@@ -1,0 +1,26 @@
+{
+  "name": "mastermechanics-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "db:init": "node scripts/db-init.js",
+    "db:seed": "node seed/index.js",
+    "db:reset": "node scripts/db-reset.js && node scripts/db-init.js && node seed/index.js",
+    "media:download": "node scripts/download-media.js",
+    "test:data": "node seed/check.js",
+    "preflight": "node scripts/preflight.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "multer": "^2.5.0",
+    "pg": "^8.13.1"
+  }
+}

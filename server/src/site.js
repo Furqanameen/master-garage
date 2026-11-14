@@ -1,0 +1,28 @@
+// NAP from https://mastermechanics.ae/ footer + /contact/ + Google Maps place pin.
+export const site = {
+  name: 'Master Mechanics Garage LLC',
+  shortName: 'Master Mechanics',
+  tagline: "Dubai's Trusted Car Service & Repair Center",
+  logo: '/wp-content/uploads/2025/05/mm-logo.png',
+  favicon: '/wp-content/uploads/2024/08/cropped-favicon-270x270.png',
+  defaultOgImage: '/wp-content/uploads/2024/09/WhatsApp-Image-2024-09-15-at-19.41.05-2.jpeg',
+  mobile: '+971586219014',
+  mobileDisplay: '+971 58 621 9014',
+  landline: '+97145549181',
+  landlineDisplay: '+971 455 491 81',
+  whatsapp: '971586219014',
+  email: 'carcare@mastermechanics.ae',
+  streetAddress: 'Warehouse No. 49, Building No. 3, Span Precast Compound 71 Street',
+  addressLocality: 'Dubai Investment Park 2',
+  addressRegion: 'Dubai',
+  addressCountry: 'AE',
+  addressLine: 'Master Mechanics Garage LLC Warehouse No. 49, Building No. 3, Span Precast Compound 71 Street, Dubai Investment Park 2 (DIP 2) Dubai, United Arab Emirates',
+  mapUrl: 'https://rb.gy/g6j5r0',
+  geoLat: 24.9685316,
+  geoLng: 55.1922678,
+  hours: 'Monday – Saturday, 9 AM to 7 PM (Sunday closed)',
+  social: {
+    facebook: 'https://www.facebook.com/profile.php?id=61565806588918&mibextid=ZbWKwL',
+    instagram: 'https://www.instagram.com/mastermechanics.ae/',
+  },
+};

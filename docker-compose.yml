@@ -1,0 +1,44 @@
+# docker compose up -d --build
+# docker compose run --rm web sh -c "npm --prefix server run db:init && npm --prefix server run db:seed"
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: furqan
+      POSTGRES_PASSWORD: furqan
+      POSTGRES_DB: mastermechanics
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U furqan -d mastermechanics"]
+      interval: 5s
+      retries: 10
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 4000
+      NODE_ENV: development
+      DATABASE_URL: postgres://furqan:furqan@db:5432/mastermechanics
+      DATABASE_SSL: "false"
+      SITE_URL: http://localhost:4000
+      MEDIA_FALLBACK_BASE: https://mastermechanics.ae
+      LEAD_WEBHOOK_URL: ""
+      GEO_LAT: "24.9685316"
+      GEO_LNG: "55.1922678"
+      ADMIN_USER: admin
+      ADMIN_PASSWORD: CHANGE_ME_AT_LEAST_12_CHARS
+      SESSION_SECRET: CHANGE_ME_RUN_openssl_rand_hex_32
+    volumes:
+      - uploads:/app/server/public/wp-content
+    ports:
+      - "4000:4000"
+
+volumes:
+  pgdata:
+  uploads:

@@ -1,0 +1,80 @@
+# Dependencies — never push these
+node_modules/
+**/node_modules/
+client/node_modules/
+server/node_modules/
+
+# Secrets — keep only the example env files
+.env
+**/.env
+.env.*
+**/.env.*
+!.env.example
+!.env.production.example
+!**/.env.example
+!**/.env.production.example
+server/.env
+*.pem
+*.key
+*.p12
+credentials.json
+
+# Build output (run `npm run build` on the server)
+client/dist/
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Logs and package-manager noise
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.npm
+.pnpm-store/
+.yarn/
+.yarn-integrity
+.pnp.*
+*.tgz
+node_repl_history
+.node_repl_history
+
+# Caches and test output
+.cache/
+.turbo/
+.vite/
+**/.vite/
+coverage/
+.nyc_output/
+.eslintcache
+tmp/
+temp/
+*.pid
+*.seed
+*.pid.lock
+
+# Admin uploads created at runtime (seeded images in wp-content/ are kept)
+server/public/uploads/
+!server/public/uploads/.gitkeep
+
+# OS and editors
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
+*~
+*.orig
+
+# Optional local tooling
+playwright-report/
+test-results/
+*.local
