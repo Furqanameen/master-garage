@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS pages (
   meta_description TEXT,
   h1               TEXT,
   subtitle         TEXT,
-  hero_image       TEXT,                                   -- '/wp-content/uploads/...'
+  hero_image       TEXT,                                   -- '/images/master-mechanics-garage-....jpg'
   card_image       TEXT,
   excerpt          TEXT,
   content          JSONB       NOT NULL DEFAULT '{}'::jsonb,

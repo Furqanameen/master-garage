@@ -1,8 +1,10 @@
 // Existing mastermechanics.ae pages, keyed by their original paths and image URLs.
 
-const U = '/wp-content/uploads';
-export const LOGO = `${U}/2025/05/mm-logo.png`;
-export const OG_DEFAULT = `${U}/2024/09/WhatsApp-Image-2024-09-15-at-19.41.05-2.jpeg`;
+import mediaRedirects from '../../src/mediaRedirects.json' with { type: 'json' };
+
+export const LOGO = '/images/master-mechanics-garage-logo.png';
+export const OG_DEFAULT = '/images/master-mechanics-garage-car-service-dubai-dip.jpg';
+const img = (ym, file) => mediaRedirects[`/wp-content/uploads/${ym}/${file}`];
 
 /* ------------------------------------------------------------------ brands (spare parts page + home) */
 export const brandGroups = [
@@ -24,11 +26,11 @@ export const brandGroups = [
   { name: 'Others', logos: [
     ['Vauxhall', 'vaux.jpeg', '2024/10'], ['TVR', 'tvr.png', '2024/10'], ['Triumph', 'tri.png', '2024/10'], ['Morgan', 'morgan.png', '2024/10'],
     ['MINI', 'minni.jpeg', '2024/10'], ['Car brand', 'mac.png', '2024/10'], ['Car brand', 'grin.png', '2024/10'], ['Car brand', 'ac.png', '2024/10'] ] },
-].map((g) => ({ name: g.name, logos: g.logos.map(([alt, file, ym]) => ({ alt: `${alt} logo`, src: `${U}/${ym}/${file}` })) }));
+].map((g) => ({ name: g.name, logos: g.logos.map(([alt, file, ym]) => ({ alt: `${alt} logo`, src: img(ym, file) })) }));
 
 const homeBrandStrip = [
-  `${U}/2025/05/audi-removebg-preview.png`, `${U}/2024/10/vaux.jpeg`, `${U}/2024/10/minni.jpeg`, `${U}/2024/10/morgan.png`,
-  `${U}/2025/05/merc.jpg`, `${U}/2024/10/tri.png`, `${U}/2024/10/tvr.png`, `${U}/2024/09/z-1.jpeg`, `${U}/2025/05/GMC-Logo.avif`,
+  '/images/master-mechanics-garage-audi-service-dubai.png', '/images/master-mechanics-garage-vauxhall-service-dubai.jpg', '/images/master-mechanics-garage-mini-cooper-service-dubai.jpg', '/images/master-mechanics-garage-morgan-service-dubai.png',
+  '/images/master-mechanics-garage-mercedes-benz-service-dubai.jpg', '/images/master-mechanics-garage-triumph-service-dubai.png', '/images/master-mechanics-garage-tvr-service-dubai.png', '/images/master-mechanics-garage-chevrolet-service-dubai.jpg', '/images/master-mechanics-garage-gmc-service-dubai.avif',
 ];
 
 /* ------------------------------------------------------------------ pages */
@@ -50,35 +52,35 @@ pages.push({
     brandsTitle: 'Car Brands We Serve',
     brandStrip: homeBrandStrip,
     brandGroups,
-    workshopImage: `${U}/2024/09/WhatsApp-Image-2024-09-01-at-12.06.29.jpeg`,
+    workshopImage: '/images/master-mechanics-garage-workshop-dubai-dip.jpg',
     why: {
       title: 'Why Choose Us',
       intro: 'We believe in building long-lasting relationships with our customers based on trust and reliability. Let Master Mechanics Garage LLC be your one-stop shop for all your automotive needs.',
       items: [
-        { icon: `${U}/2025/06/technician.png`, title: 'Expert Technicians', text: 'Our highly skilled mechanics have years of experience working on a wide range of vehicles.' },
-        { icon: `${U}/2025/06/spare-parts.png`, title: 'Advanced Equipment', text: 'We utilize the latest diagnostic tools and technology to ensure accurate and efficient repairs.' },
-        { icon: `${U}/2025/06/toolbox.png`, title: 'Genuine Spare Parts', text: 'We use only high-quality, original equipment manufacturer (OEM) parts.' },
-        { icon: `${U}/2025/06/price-comparison.png`, title: 'Transparent Pricing', text: 'We provide honest and upfront estimates, with no hidden fees.' },
-        { icon: `${U}/2025/06/good-feedback.png`, title: 'Customer Satisfaction', text: 'Your satisfaction is our top priority. We strive to exceed your expectations with every visit.' },
+        { icon: '/images/master-mechanics-garage-expert-technicians.png', title: 'Expert Technicians', text: 'Our highly skilled mechanics have years of experience working on a wide range of vehicles.' },
+        { icon: '/images/master-mechanics-garage-advanced-equipment.png', title: 'Advanced Equipment', text: 'We utilize the latest diagnostic tools and technology to ensure accurate and efficient repairs.' },
+        { icon: '/images/master-mechanics-garage-genuine-spare-parts.png', title: 'Genuine Spare Parts', text: 'We use only high-quality, original equipment manufacturer (OEM) parts.' },
+        { icon: '/images/master-mechanics-garage-transparent-pricing.png', title: 'Transparent Pricing', text: 'We provide honest and upfront estimates, with no hidden fees.' },
+        { icon: '/images/master-mechanics-garage-customer-satisfaction.png', title: 'Customer Satisfaction', text: 'Your satisfaction is our top priority. We strive to exceed your expectations with every visit.' },
       ],
     },
     servicesTitle: 'Our Services',
     services: [
-      { title: 'AC Repair Service', path: '/ac-repair-service/', image: `${U}/2025/06/car-AC-repair-work.jpg`,
+      { title: 'AC Repair Service', path: '/ac-repair-service/', image: '/images/master-mechanics-garage-car-ac-repair-dubai-dip.jpg',
         text: "Can you imagine driving a car without an AC in the scorching heat of Dubai? A properly operating car air conditioning system is necessary in Dubai’s harsh climate. In order to keep your car cool even on the hottest summer days, Master Mechanics specializes in thorough automotive AC repairs and maintenance. Our qualified professionals provide dependable, effective car cooling system repair services at affordable costs by combining their knowledge with cutting-edge technology." },
-      { title: 'Electric Repair Service', path: '/car-electrical-repair/', image: `${U}/2025/06/Car-electrical-work.png`,
+      { title: 'Electric Repair Service', path: '/car-electrical-repair/', image: '/images/master-mechanics-garage-car-electrical-repair-dubai-dip.png',
         text: 'Electrical systems in modern automobiles have advanced well beyond simple wiring and basic components. Modern vehicles rely on sophisticated electrical systems as they control everything from safety features to engine performance. At Master Mechanics, we are aware that diagnosing and fixing these intricate systems requires knowledge of vehicle electronics, advanced diagnostic equipment, and experience. From straightforward battery replacements to intricate computer system diagnostics, our cutting-edge facility in Dubai is prepared to handle all of your car’s electrical requirements.' },
-      { title: 'Engine Repair', path: '/engine-repair-service/', image: `${U}/2025/06/car-engine-work.jpg`,
+      { title: 'Engine Repair', path: '/engine-repair-service/', image: '/images/master-mechanics-garage-car-engine-repair-dubai-dip.jpg',
         text: 'At Master Mechanics, we know that the engine of your car is its heart and it has to be carefully maintained and cared for to operate at its best. Our team of qualified technicians has been providing comprehensive engine diagnosis, repair, and maintenance services to Dubai’s diverse automotive community for many years. Our cutting-edge facility in Dubai is prepared to address all of your engine-related needs, whether you’re having sensor issues, an overheating engine, or just need a regular oil change.' },
-      { title: 'Fuel Injector Service', path: '/injector-cleaning-service/', image: `${U}/2025/06/Fuel-Injection-work.jpg`,
+      { title: 'Fuel Injector Service', path: '/injector-cleaning-service/', image: '/images/master-mechanics-garage-fuel-injector-service-dubai-dip.jpg',
         text: 'We at Master Mechanics know how crucial fuel injectors are for your vehicle’s performance system. So, as the top automobile professionals in Dubai Investment Park, we offer complete fuel injector servicing, guaranteeing peak engine performance, increased fuel economy, and lower emissions. Our skilled specialists use cutting-edge cleaning technologies and diagnostic tools to provide exceptional results for all car makes and models.' },
-      { title: 'Car Maintenance', path: '/maintenance-service/', image: `${U}/2024/09/WhatsApp-Image-2024-09-15-at-19.40.57-1.jpeg`,
+      { title: 'Car Maintenance', path: '/maintenance-service/', image: '/images/master-mechanics-garage-car-maintenance-dubai-dip.jpg',
         text: 'Regular car maintenance is non-negotiable for your vehicle’s longevity and performance. As a leading provider of car routine maintenance in DIP, Dubai, we combine technical expertise with superior customer service to provide you peace of mind when you hit the road with your vehicle.' },
-      { title: 'Car Repair Work', path: '/repair-service/', image: `${U}/2025/01/Engine-sensor-repair-in-Dubai-1-scaled.jpg`,
+      { title: 'Car Repair Work', path: '/repair-service/', image: '/images/master-mechanics-garage-engine-sensor-repair-dubai.jpg',
         text: 'With our state-of-the-art facilities and certified technicians, we deliver premium car repair services in Dubai Investment Park. Our commitment to excellence and customer satisfaction makes us stand out from the crowd. We are the preferred choice of many car owners for all automotive repair needs in Dubai.' },
-      { title: 'Car Denting Painting', path: '/car-denting-painting-service/', image: `${U}/2025/06/car-dent-paint.jpg`,
+      { title: 'Car Denting Painting', path: '/car-denting-painting-service/', image: '/images/master-mechanics-garage-car-denting-painting-dubai-dip.jpg',
         text: 'At Master Mechanics, we understand how important the appearance of your car is for you. At our state-of-the-art facility in Dubai, we offer comprehensive auto car dent repair, paint services, and professional detailing to restore and enhance your vehicle’s aesthetic appeal.' },
-      { title: 'Wheel Alignment & Balancing', path: '/wheel-alignment-and-tire-balancing/', image: `${U}/2025/06/wheel-balancing.jpg`,
+      { title: 'Wheel Alignment & Balancing', path: '/wheel-alignment-and-tire-balancing/', image: '/images/master-mechanics-garage-wheel-alignment-balancing-dubai-dip.jpg',
         text: 'Properly balanced tires are essential for vehicle safety, comfort, and performance. Using cutting-edge computerized equipment, our state-of-the-art facility in Dubai Investment Park provides accurate tire balancing services. With our skilled specialists and state-of-the-art technology, we guarantee that the tires on your car are precisely balanced for optimum performance.' },
     ],
     testimonialsTitle: 'Happy Clients & Feedbacks',
@@ -117,7 +119,7 @@ pages.push({
   // The live page has placeholder text ("jjggjgkgkgk") as its meta description – replaced here.
   meta_description: 'Master Mechanics Garage is a car service center in Dubai Investment Park 2 for German, European, Japanese and American cars. Genuine parts, transparent pricing.',
   h1: 'Know Us Better',
-  hero_image: `${U}/2024/09/WhatsApp-Image-2024-09-01-at-12.06.29.jpeg`,
+  hero_image: '/images/master-mechanics-garage-workshop-dubai-dip.jpg',
   content: {
     intro: [
       'Welcome to Master Mechanics!',
@@ -241,7 +243,7 @@ pages.push({
   title: 'Thank you - Mastermechanics',
   meta_description: 'Thank you for contacting Master Mechanics Garage. Our team will connect with you very soon.',
   h1: 'Thank You!!',
-  hero_image: `${U}/2021/07/th-31775804390-1344x966-1.jpg`,
+  hero_image: '/images/master-mechanics-garage-spare-parts-dubai-dip.jpg',
   content: {
     intro: ['Our team will connect with you very soon.'],
   },
@@ -252,7 +254,7 @@ pages.push({
   title: 'Workshop | Master Mechanics Garage DIP, Dubai',
   meta_description: "Master Mechanics Garage is Dubai Investment Park's car service centre – quality care, a customer lounge, and service for Japanese, American, German and European cars.",
   h1: 'Quality Care You Can Count On',
-  hero_image: `${U}/2024/09/WhatsApp-Image-2024-09-15-at-19.40.57-1.jpeg`,
+  hero_image: '/images/master-mechanics-garage-car-maintenance-dubai-dip.jpg',
   content: {
     intro: [
       'We believe in building long-lasting relationships with our customers based on trust and reliability. Let Master Mechanics Garage LLC be your one-stop shop for all your automotive needs.',
@@ -291,7 +293,7 @@ const wa = 'Message us on WhatsApp or book an appointment and our team will get 
 const svc = (o) => pages.push({ type: 'service', in_menu: true, ...o });
 
 svc({
-  path: '/ac-repair-service/', nav_label: 'Ac Repair Service', sort_order: 10, card_image: `${U}/2025/06/car-AC-repair-work.jpg`,
+  path: '/ac-repair-service/', nav_label: 'Ac Repair Service', sort_order: 10, card_image: '/images/master-mechanics-garage-car-ac-repair-dubai-dip.jpg',
   title: 'Best Car AC Repair in DIP | Auto Cooling System Repair in DIP',
   meta_description: 'Affordable, expert car AC and cooling system repair in Dubai Investment Park so you stay comfortable on the road – Master Mechanics.',
   h1: "DIP's Premier Auto AC Repair Specialists", subtitle: "Stay Cool with Dubai Investment Park's Most Trusted AC Repair Experts.",
@@ -313,7 +315,7 @@ svc({
 });
 
 svc({
-  path: '/car-denting-painting-service/', nav_label: 'Car Denting And Painting', sort_order: 11, card_image: `${U}/2025/06/car-dent-paint.jpg`,
+  path: '/car-denting-painting-service/', nav_label: 'Car Denting And Painting', sort_order: 11, card_image: '/images/master-mechanics-garage-car-denting-painting-dubai-dip.jpg',
   title: 'Premium Car Paint & Dent Repair Services in DIP, Dubai',
   meta_description: 'Top-quality car paint, dent repair and detailing at affordable rates in Dubai Investment Park. Visit Master Mechanics Garage for expert service.',
   h1: 'Premium Car Paint Services in DIP, Dubai', subtitle: 'Restore the beauty of your car with experts.',
@@ -340,7 +342,7 @@ svc({
 });
 
 svc({
-  path: '/wheel-alignment-and-tire-balancing/', nav_label: 'Wheel Alignment And Tire Balancing', sort_order: 12, card_image: `${U}/2025/06/wheel-balancing.jpg`,
+  path: '/wheel-alignment-and-tire-balancing/', nav_label: 'Wheel Alignment And Tire Balancing', sort_order: 12, card_image: '/images/master-mechanics-garage-wheel-alignment-balancing-dubai-dip.jpg',
   title: 'Car Wheel Alignment and Tire Balancing in DIP, Dubai',
   meta_description: 'Affordable, expert wheel alignment and tire balancing at Master Mechanics Garage, Dubai Investment Park – smoother, safer drives.',
   h1: 'Professional Tire & Wheel Balancing Services in DIP, Dubai', subtitle: 'Experience smoother rides with expert wheel balancing.',
@@ -385,7 +387,7 @@ svc({
 });
 
 svc({
-  path: '/car-electrical-repair/', nav_label: 'Electric Repair Service', sort_order: 14, card_image: `${U}/2025/06/Car-electrical-work.png`,
+  path: '/car-electrical-repair/', nav_label: 'Electric Repair Service', sort_order: 14, card_image: '/images/master-mechanics-garage-car-electrical-repair-dubai-dip.png',
   title: 'Car Electrical, Battery Repair & Replacement in DIP, Dubai',
   meta_description: 'For reliable and affordable car electrical repair in Dubai Investment Park, trust Master Mechanics – get back on the road fast.',
   h1: 'Car Electrical Repair in DIP, Dubai', subtitle: 'Trust us to deal with the growing complexity of modern vehicle electronics.',
@@ -410,7 +412,7 @@ svc({
 });
 
 svc({
-  path: '/engine-repair-service/', nav_label: 'Engine Repair', sort_order: 15, card_image: `${U}/2025/06/car-engine-work.jpg`,
+  path: '/engine-repair-service/', nav_label: 'Engine Repair', sort_order: 15, card_image: '/images/master-mechanics-garage-car-engine-repair-dubai-dip.jpg',
   title: 'Car Engine Diagnostics, Repair and Overhaul Service in DIP',
   meta_description: 'We specialize in affordable car engine repair, oil changes, sensor and overheating repairs in Dubai Investment Park.',
   h1: 'Affordable Car Engine Repair Service Dubai Investment Park', subtitle: 'We are your trusted engine repair experts in DIP, Dubai.',
@@ -432,7 +434,7 @@ svc({
 });
 
 svc({
-  path: '/injector-cleaning-service/', nav_label: 'Injector Cleaning Service', sort_order: 16, card_image: `${U}/2025/06/Fuel-Injection-work.jpg`,
+  path: '/injector-cleaning-service/', nav_label: 'Injector Cleaning Service', sort_order: 16, card_image: '/images/master-mechanics-garage-fuel-injector-service-dubai-dip.jpg',
   title: 'Best Car Fuel Injector Cleaning Service in Dubai Investment Park',
   meta_description: 'Get expert fuel injector cleaning services in DIP, Dubai. Improve engine performance, fuel economy & emissions with Master Mechanics.',
   h1: 'Best Car Fuel Injector Cleaning Service in DIP, Dubai', subtitle: "Optimize your engine's performance with affordable fuel injector services.",
@@ -449,7 +451,7 @@ svc({
 });
 
 svc({
-  path: '/maintenance-service/', nav_label: 'Maintenance', sort_order: 17, card_image: `${U}/2024/09/WhatsApp-Image-2024-09-15-at-19.40.57-1.jpeg`,
+  path: '/maintenance-service/', nav_label: 'Maintenance', sort_order: 17, card_image: '/images/master-mechanics-garage-car-maintenance-dubai-dip.jpg',
   title: 'Car Maintenance Services in DIP Dubai | Master Mechanics',
   meta_description: 'Affordable, expert car maintenance in DIP, Dubai by Master Mechanics – quality service, longer vehicle life and peace of mind.',
   h1: 'Car Maintenance Services in DIP, Dubai', subtitle: 'Trust Master Mechanics for premium vehicle maintenance at affordable cost.',
@@ -481,7 +483,7 @@ svc({
 });
 
 svc({
-  path: '/repair-service/', nav_label: 'Repair Service', sort_order: 18, card_image: `${U}/2025/01/Engine-sensor-repair-in-Dubai-1-scaled.jpg`,
+  path: '/repair-service/', nav_label: 'Repair Service', sort_order: 18, card_image: '/images/master-mechanics-garage-engine-sensor-repair-dubai.jpg',
   title: 'Expert Car Repair Services in DIP Dubai | Master Mechanics',
   meta_description: 'Premium car repair in Dubai Investment Park (DIP) with certified technicians, genuine parts and fast service – Master Mechanics.',
   h1: 'Expert Auto Repair Services in DIP, Dubai', subtitle: 'One-stop shop for professional car repairs at competitive prices.',
@@ -527,10 +529,17 @@ export const faqs = [
 ];
 
 export const gallery = [
-  '2024/09/WhatsApp-Image-2024-09-15-at-19.41.05-2.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.05.jpeg',
-  '2024/09/WhatsApp-Image-2024-09-15-at-19.41.02-1-1.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.01-2.jpeg',
-  '2024/09/WhatsApp-Image-2024-09-15-at-19.41.04-1-1.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.00.jpeg',
-  '2024/09/WhatsApp-Image-2024-09-15-at-19.41.04.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.03.jpeg',
-  '2024/09/WhatsApp-Image-2024-09-15-at-19.40.59-2.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.40.59-1.jpeg',
-  '2024/09/WhatsApp-Image-2024-09-15-at-19.41.00-1.jpeg',
-].map((p, i) => ({ image: `${U}/${p}`, alt: `Master Mechanics Garage workshop photo ${i + 1}`, sort_order: i }));
+  { image: OG_DEFAULT, alt: 'Master Mechanics Garage LLC car service workshop in Dubai Investment Park', sort_order: 0 },
+  ...[
+    '2024/09/WhatsApp-Image-2024-09-15-at-19.41.05.jpeg',
+    '2024/09/WhatsApp-Image-2024-09-15-at-19.41.02-1-1.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.01-2.jpeg',
+    '2024/09/WhatsApp-Image-2024-09-15-at-19.41.04-1-1.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.00.jpeg',
+    '2024/09/WhatsApp-Image-2024-09-15-at-19.41.04.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.41.03.jpeg',
+    '2024/09/WhatsApp-Image-2024-09-15-at-19.40.59-2.jpeg', '2024/09/WhatsApp-Image-2024-09-15-at-19.40.59-1.jpeg',
+    '2024/09/WhatsApp-Image-2024-09-15-at-19.41.00-1.jpeg',
+  ].map((p, i) => ({
+    image: mediaRedirects[`/wp-content/uploads/${p}`],
+    alt: `Master Mechanics Garage LLC workshop photo ${i + 2}`,
+    sort_order: i + 1,
+  })),
+];

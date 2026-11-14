@@ -2,7 +2,6 @@
 // IMPORTANT: the live category slug for "Auto Service" is "%d0%b0uto-service" – its first letter is the
 // Cyrillic "а" (U+0430), not a latin "a". It is kept as-is so existing URLs/rankings are preserved;
 // /blog/auto-service/... (latin) 301-redirects to it.
-const U = '/wp-content/uploads';
 const AUTO = 'аuto-service';
 
 export const posts = [
@@ -11,7 +10,7 @@ export const posts = [
     title: 'Mercedes Car Servicing in Dubai', seo_title: 'Mercedes Car Servicing in Dubai - Mastermechanics',
     meta_description: 'Master Mechanics offers Mercedes-Benz servicing in Dubai with genuine parts, certified technicians, clear pricing and quick turnaround.',
     excerpt: 'Why regular professional servicing matters for Mercedes-Benz vehicles, and what Master Mechanics offers Dubai owners.',
-    image: `${U}/2025/09/mercedes_service.jpg`, published_at: '2025-09-01T09:00:00Z',
+    image: '/images/master-mechanics-garage-mercedes-service-dubai-dip.jpg', published_at: '2025-09-01T09:00:00Z',
     content: {
       intro: ['Mercedes-Benz owners in Dubai want dealership-level care without the dealership hassle. Master Mechanics provides trained technicians, genuine parts and fluids, and current diagnostic equipment, with transparent pricing and fast turnaround.'],
       sections: [
@@ -30,7 +29,7 @@ export const posts = [
     title: 'Audi Car Servicing in Dubai', seo_title: 'Audi Car Servicing in Dubai - Mastermechanics',
     meta_description: 'Premium Audi servicing in Dubai with certified technicians, genuine parts and reliable repairs. Book your Audi maintenance with Master Mechanics.',
     excerpt: 'Keep your Audi performing at its best with regular servicing and professional care.',
-    image: `${U}/2024/11/best-auto-workshops.jpg`, published_at: '2024-11-15T09:00:00Z',
+    image: '/images/master-mechanics-garage-best-auto-workshop-dubai.jpg', published_at: '2024-11-15T09:00:00Z',
     content: {
       intro: ['Master Mechanics Dubai is an Audi service provider you can rely on: certified technicians experienced with Audi models, OEM and high-quality replacement parts, diagnostic equipment, and upfront pricing.'],
       sections: [
@@ -46,7 +45,7 @@ export const posts = [
     title: 'BMW Car Servicing in Dubai – Keep Your BMW in Top Condition', seo_title: 'BMW Car Servicing in Dubai – Keep Your BMW in Top Condition - Mastermechanics',
     meta_description: 'Owning a BMW is about performance, comfort and luxury. Keep it that way with BMW servicing in Dubai from Master Mechanics.',
     excerpt: 'Maintaining BMW performance and comfort through regular servicing in Dubai.',
-    image: `${U}/2025/05/Best-Car-wheel-balancing-in-DIP.jpeg`, published_at: '2025-05-20T09:00:00Z',
+    image: '/images/master-mechanics-garage-car-wheel-balancing-dubai-dip.jpg', published_at: '2025-05-20T09:00:00Z',
     content: {
       intro: ['Owning a BMW is more than just driving a car – it’s about enjoying performance, comfort and luxury. Regular servicing keeps it that way, and Master Mechanics is a Dubai destination for BMW care with skilled technicians and genuine parts.'],
       sections: [
@@ -67,7 +66,7 @@ export const posts = [
     title: 'Why Regular Wheel Balancing Is Crucial for Highway Driving', seo_title: 'Why Regular Wheel Balancing Is Crucial for Highway Driving',
     meta_description: 'Wheel balancing in Dubai Investment Park for smoother, safer highway driving, longer tire life, better fuel economy and greater comfort.',
     excerpt: 'Wheel balancing keeps weight evenly distributed around the tire – here is why it matters at highway speeds.',
-    image: `${U}/2025/05/Best-Car-wheel-balancing-in-DIP.jpeg`, published_at: '2025-05-12T09:00:00Z',
+    image: '/images/master-mechanics-garage-car-wheel-balancing-dubai-dip.jpg', published_at: '2025-05-12T09:00:00Z',
     content: {
       intro: ['Wheel balancing spreads a wheel’s weight evenly around the tire. Unbalanced wheels rotate unevenly and cause vibration, yet many drivers only deal with the problem once it becomes obvious.'],
       sections: [
@@ -91,7 +90,7 @@ export const posts = [
     title: 'Performance Parts That Can Instantly Upgrade Your Ride', seo_title: 'Performance Parts That Can Instantly Upgrade Your Ride - Mastermechanics',
     meta_description: 'From brake pads to spark plugs, discover performance parts that improve power, safety and comfort – advice for UAE drivers from Mastermechanics.',
     excerpt: 'How performance parts can improve ride smoothness and power without a full engine replacement.',
-    image: `${U}/2025/05/Auto-parts-retailer-UAE.jpg`, published_at: '2025-05-08T09:00:00Z',
+    image: '/images/master-mechanics-garage-auto-parts-dubai.jpg', published_at: '2025-05-08T09:00:00Z',
     content: {
       intro: ['You don’t need an engine replacement to make your car feel more responsive. The right performance parts can do it.'],
       sections: [
@@ -114,7 +113,7 @@ export const posts = [
     title: 'The Ultimate Vehicle Servicing Checklist for Every Car Owner', seo_title: 'The Ultimate Vehicle Servicing Checklist for Every Car Owner - Mastermechanics',
     meta_description: 'A car care checklist for Dubai drivers: oil changes, brake inspections, tire rotations, battery checks and more.',
     excerpt: 'Vehicle care goes beyond washing – a practical checklist for Dubai’s heat and dust.',
-    image: `${U}/2025/05/image_1162113364.webp`, published_at: '2025-05-05T09:00:00Z',
+    image: '/images/master-mechanics-garage-car-service-dubai-dip.webp', published_at: '2025-05-05T09:00:00Z',
     content: {
       intro: ['Regular car maintenance improves efficiency, safety and peace of mind – especially in Dubai’s heat and dust. Use this checklist.'],
       sections: [

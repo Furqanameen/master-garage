@@ -254,6 +254,7 @@ function postLd(post) {
 function headHtml({ title, description, canonicalPath, image, type = 'website', noindex = false, jsonLd = [], keywords }) {
   const url = absPath(canonicalPath);
   const img = abs(image || site.defaultOgImage);
+  const imgType = /\.png(\?|$)/i.test(img) ? 'image/png' : 'image/jpeg';
   const lines = [
     `<title>${escapeHtml(title)}</title>`,
     description ? `<meta name="description" content="${escapeHtml(description)}">` : '',
@@ -262,14 +263,18 @@ function headHtml({ title, description, canonicalPath, image, type = 'website', 
     `<meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}">`,
     `<meta property="og:locale" content="en_US">`,
     `<meta property="og:type" content="${type}">`,
-    `<meta property="og:site_name" content="${escapeHtml(site.shortName)}">`,
+    `<meta property="og:site_name" content="${escapeHtml(site.name)}">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
     description ? `<meta property="og:description" content="${escapeHtml(description)}">` : '',
     `<meta property="og:url" content="${escapeHtml(url)}">`,
     `<meta property="og:image" content="${escapeHtml(img)}">`,
-    `<meta property="og:image:alt" content="${escapeHtml(title)}">`,
+    `<meta property="og:image:alt" content="${escapeHtml(site.defaultOgImageAlt)}">`,
+    `<meta property="og:image:width" content="${site.defaultOgImageWidth}">`,
+    `<meta property="og:image:height" content="${site.defaultOgImageHeight}">`,
+    `<meta property="og:image:type" content="${imgType}">`,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${escapeHtml(title)}">`,
+    `<meta name="twitter:image" content="${escapeHtml(img)}">`,
     description ? `<meta name="twitter:description" content="${escapeHtml(description)}">` : '',
     `<link rel="icon" href="${escapeHtml(site.favicon)}">`,
     `<meta name="geo.region" content="AE-DU">`,

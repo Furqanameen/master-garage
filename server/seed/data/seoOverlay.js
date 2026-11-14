@@ -412,7 +412,6 @@ export const overlay = {
   ),
 };
 
-const U = '/wp-content/uploads';
 export const brandSeo = {
   'bmw-service-dubai': seo(
     'BMW Specialist DIP | Independent Service',
@@ -507,21 +506,21 @@ export const brandSeo = {
 };
 
 export const brandLogos = {
-  'bmw-service-dubai': `${U}/2024/08/6.jpeg`,
-  'mercedes-service-dubai': `${U}/2025/05/merc.jpg`,
-  'audi-service-dubai': `${U}/2025/05/audi-removebg-preview.png`,
-  'toyota-service-dubai': `${U}/2024/08/toyota-removebg-preview.png`,
-  'nissan-service-dubai': `${U}/2024/08/nissan-removebg-preview.png`,
-  'lexus-service-dubai': `${U}/2024/08/lexus-removebg-preview.png`,
-  'honda-service-dubai': `${U}/2025/05/honda.png`,
-  'ford-service-dubai': `${U}/2024/08/5.png`,
-  'chevrolet-service-dubai': `${U}/2024/09/z-1.jpeg`,
-  'gmc-service-dubai': `${U}/2025/05/GMC-Logo.avif`,
-  'mitsubishi-service-dubai': `${U}/2024/08/mitsu-removebg-preview.png`,
-  'infiniti-service-dubai': `${U}/2024/08/infiniti-removebg-preview-300x162.png`,
-  'suzuki-service-dubai': `${U}/2024/08/suzuki-removebg-preview.png`,
-  'mini-service-dubai': `${U}/2024/10/minni.jpeg`,
-  'mazda-service-dubai': `${U}/2024/08/mazda-removebg-preview.png`,
+  'bmw-service-dubai': '/images/master-mechanics-garage-bmw-service-dubai.jpg',
+  'mercedes-service-dubai': '/images/master-mechanics-garage-mercedes-benz-service-dubai.jpg',
+  'audi-service-dubai': '/images/master-mechanics-garage-audi-service-dubai.png',
+  'toyota-service-dubai': '/images/master-mechanics-garage-toyota-service-dubai.png',
+  'nissan-service-dubai': '/images/master-mechanics-garage-nissan-service-dubai.png',
+  'lexus-service-dubai': '/images/master-mechanics-garage-lexus-service-dubai.png',
+  'honda-service-dubai': '/images/master-mechanics-garage-honda-service-dubai.png',
+  'ford-service-dubai': '/images/master-mechanics-garage-ford-service-dubai.png',
+  'chevrolet-service-dubai': '/images/master-mechanics-garage-chevrolet-service-dubai.jpg',
+  'gmc-service-dubai': '/images/master-mechanics-garage-gmc-service-dubai.avif',
+  'mitsubishi-service-dubai': '/images/master-mechanics-garage-mitsubishi-service-dubai.png',
+  'infiniti-service-dubai': '/images/master-mechanics-garage-infiniti-service-dubai.png',
+  'suzuki-service-dubai': '/images/master-mechanics-garage-suzuki-service-dubai.png',
+  'mini-service-dubai': '/images/master-mechanics-garage-mini-cooper-service-dubai.jpg',
+  'mazda-service-dubai': '/images/master-mechanics-garage-mazda-service-dubai.png',
 };
 
 const areaSeo = (area, slugHint) => seo(

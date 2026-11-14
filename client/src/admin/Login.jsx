@@ -26,7 +26,7 @@ export default function Login({ onLogin }) {
   return (
     <div className="adm-login">
       <form className="adm-card" onSubmit={submit}>
-        <img src="/wp-content/uploads/2025/05/mm-logo.png" alt="Master Mechanics" width="150" height="45" />
+        <img src="/images/master-mechanics-garage-logo.png" alt="Master Mechanics Garage LLC" width="150" height="45" />
         <h1>Admin sign in</h1>
         <label>Username<input value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} autoComplete="username" required /></label>
         <label>Password<input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} autoComplete="current-password" required /></label>

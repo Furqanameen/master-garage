@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 5173,
-    proxy: { '/api': api, '/wp-content': api, '/uploads': api, '/sitemap.xml': api, '/robots.txt': api },
+    proxy: { '/api': api, '/images': api, '/wp-content': api, '/uploads': api, '/sitemap.xml': api, '/robots.txt': api },
   },
 });

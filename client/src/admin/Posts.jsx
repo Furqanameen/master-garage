@@ -122,7 +122,7 @@ export function PostForm() {
       <label>Meta description<textarea rows="2" value={form.meta_description || ''} onChange={set('meta_description')} /></label>
       <label>Cover image
         {form.image && <img className="adm-thumb" src={form.image} alt="" />}
-        <input value={form.image || ''} onChange={set('image')} placeholder="/uploads/… or /wp-content/uploads/…" />
+        <input value={form.image || ''} onChange={set('image')} placeholder="/images/… or /uploads/…" />
         <input type="file" accept="image/*" onChange={(e) => uploadCover(e).catch((err) => setError(err.message))} />
       </label>
       <label>Body

@@ -21,7 +21,7 @@ export function safeMediaUrl(u) {
   const s = String(u || '').trim();
   if (!s) return null;
   if (s.includes('..') || s.includes('\\') || s.includes('\0')) return null;
-  if (s.startsWith('/uploads/') || s.startsWith('/wp-content/uploads/')) return s.slice(0, 500);
+  if (s.startsWith('/uploads/') || s.startsWith('/images/') || s.startsWith('/wp-content/uploads/')) return s.slice(0, 500);
   return null;
 }
 

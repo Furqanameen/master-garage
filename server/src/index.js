@@ -13,6 +13,7 @@ import { pool } from './db.js';
 import { normalisePath, encodePath } from './lib/html.js';
 import { inject } from './lib/inject.js';
 import { redact } from './lib/safe.js';
+import mediaRedirects from './mediaRedirects.json' with { type: 'json' };
 
 const app = express();
 app.disable('x-powered-by');
@@ -48,7 +49,14 @@ app.get('/sitemap.xml', async (_req, res, next) => {
   } catch (e) { next(e); }
 });
 
-/* ---- local images at the same /wp-content/uploads/... paths as the live site ---- */
+app.use((req, res, next) => {
+  if (!req.path.startsWith('/wp-content/')) return next();
+  const to = mediaRedirects[req.path] || mediaRedirects[decodeURIComponent(req.path)];
+  if (to) return res.redirect(301, to);
+  next();
+});
+
+/* ---- local images under /images (legacy /wp-content URLs 301 above) ---- */
 app.use(express.static(config.publicDir, {
   index: false, maxAge: '30d', fallthrough: true,
   setHeaders: (res, file) => { if (!/[\\/]wp-content[\\/]/.test(file)) res.setHeader('Cache-Control', 'public, max-age=3600'); },

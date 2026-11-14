@@ -65,7 +65,7 @@ else {
 }
 
 // --- media
-const up = path.join(config.publicDir, 'wp-content', 'uploads');
+const up = path.join(config.publicDir, 'images');
 let files = 0;
 const walk = (d) => { for (const e of fs.existsSync(d) ? fs.readdirSync(d, { withFileTypes: true }) : []) e.isDirectory() ? walk(path.join(d, e.name)) : e.name !== '.gitkeep' && files++; };
 walk(up);

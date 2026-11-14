@@ -24,7 +24,7 @@ function Header() {
     <header className="header">
       <div className="container header__row">
         <Link to="/" className="logo" aria-label="Master Mechanics – home">
-          <img src={site?.logo || '/wp-content/uploads/2025/05/mm-logo.png'} alt="Master Mechanics Garage" width="160" height="48" />
+          <img src={site?.logo || '/images/master-mechanics-garage-logo.png'} alt="Master Mechanics Garage LLC" width="160" height="48" />
         </Link>
 
         <button className="burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>

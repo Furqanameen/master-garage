@@ -6,7 +6,7 @@ import { PageHero, Faq, Article, RelatedStrip, ContactDetails } from '../compone
 import LeadForm from '../components/LeadForm.jsx';
 
 const enc = (p) => encodeURI(p);
-const LOGO = '/wp-content/uploads/2025/05/mm-logo.png';
+const LOGO = '/images/master-mechanics-garage-logo.png';
 
 export function ServicesIndex({ page }) {
   const { data: services = [] } = useApi('/pages?type=service');

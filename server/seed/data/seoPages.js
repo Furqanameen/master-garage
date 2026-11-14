@@ -8,7 +8,6 @@ import { extraServices } from './extraServices.js';
 //   - no invented prices, ratings, years in business or distances
 // Please review each page, add real photos / prices / customer stories, and confirm anything marked "confirm".
 
-const U = '/wp-content/uploads';
 const WHY = [
   'Certified, experienced technicians',
   'Modern diagnostic equipment',
