@@ -44,6 +44,9 @@
 .mm-app .related-block {padding-bottom: 32px;}
 .mm-app .related-block h2 {font-size: 1.15rem; margin-bottom: 8px;}
 .mm-app .dropdown:hover .dropdown__menu, .mm-app .dropdown:focus-within .dropdown__menu {display: grid;}
+.mm-app .dropdown--shut .dropdown__menu,
+.mm-app .dropdown--shut:hover .dropdown__menu,
+.mm-app .dropdown--shut:focus-within .dropdown__menu {display: none !important;}
 .mm-app .header__cta {display: flex; align-items: center; gap: 8px; flex-shrink: 0;}
 .mm-app .header__phone, .mm-app .header__wa {white-space: nowrap;}
 .mm-app .burger {display: none; margin-left: 0; background: none; border: 0; padding: 10px; cursor: pointer;}
@@ -56,6 +59,10 @@
 .mm-app .dropdown:hover .dropdown__menu,
 .mm-app .dropdown:focus-within .dropdown__menu,
 .mm-app .dropdown--open .dropdown__menu {display: grid;}
+.mm-app .dropdown--shut .dropdown__menu,
+.mm-app .dropdown--shut:hover .dropdown__menu,
+.mm-app .dropdown--shut:focus-within .dropdown__menu,
+.mm-app .dropdown--shut.dropdown--open .dropdown__menu {display: none !important;}
 .mm-app .header__cta {order: 3; margin-left: auto;}
 .mm-app .header__num {display: none;}
 .mm-app .header__phone .header__call {display: inline;}

@@ -9,7 +9,15 @@ function Header() {
   const { site, nav } = useSite();
   const [open, setOpen] = useState(false);
   const [drop, setDrop] = useState(null);
+  const [shut, setShut] = useState(false);
   const { pathname } = useLocation();
+  const closeMenus = () => {
+    setOpen(false);
+    setDrop(null);
+    setShut(true);
+    const el = document.activeElement;
+    if (el instanceof HTMLElement) el.blur();
+  };
   useEffect(() => { setOpen(false); setDrop(null); }, [pathname]);
 
   return (
@@ -26,18 +34,24 @@ function Header() {
         <nav className={`nav ${open ? 'nav--open' : ''}`} aria-label="Main">
           <NavLink to="/" end>Home</NavLink>
           <NavLink to="/spare-parts/">Spare Parts</NavLink>
-          <div className={`dropdown ${drop === 'services' ? 'dropdown--open' : ''}`}>
-            <NavLink to="/services/" onClick={(e) => { if (open) { e.preventDefault(); setDrop(drop === 'services' ? null : 'services'); } }}>Services ▾</NavLink>
-            <div className="dropdown__menu">
+          <div
+            className={`dropdown ${drop === 'services' ? 'dropdown--open' : ''} ${shut ? 'dropdown--shut' : ''}`}
+            onMouseLeave={() => { setDrop(null); setShut(false); }}
+          >
+            <NavLink to="/services/" onClick={(e) => { if (open) { e.preventDefault(); setDrop(drop === 'services' ? null : 'services'); setShut(false); } }}>Services ▾</NavLink>
+            <div className="dropdown__menu" onClick={closeMenus}>
               {nav?.menuServices.map((s) => (
                 <Link key={s.path} to={enc(s.path)}>{s.label}</Link>
               ))}
               <Link to="/services/" className="nav-brand--all">All services</Link>
             </div>
           </div>
-          <div className={`dropdown ${drop === 'spec' ? 'dropdown--open' : ''}`}>
-            <NavLink to="/specializations/" onClick={(e) => { if (open) { e.preventDefault(); setDrop(drop === 'spec' ? null : 'spec'); } }}>Specialize ▾</NavLink>
-            <div className="dropdown__menu dropdown__menu--brands">
+          <div
+            className={`dropdown ${drop === 'spec' ? 'dropdown--open' : ''} ${shut ? 'dropdown--shut' : ''}`}
+            onMouseLeave={() => { setDrop(null); setShut(false); }}
+          >
+            <NavLink to="/specializations/" onClick={(e) => { if (open) { e.preventDefault(); setDrop(drop === 'spec' ? null : 'spec'); setShut(false); } }}>Specialize ▾</NavLink>
+            <div className="dropdown__menu dropdown__menu--brands" onClick={closeMenus}>
               {nav?.brands.map((b) => (
                 <Link key={b.path} to={enc(b.path)} className="nav-brand">
                   {b.logo ? <img src={b.logo} alt="" width="36" height="22" /> : null}
