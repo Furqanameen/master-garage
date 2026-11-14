@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import DynamicPage from './pages/DynamicPage.jsx';
@@ -9,15 +9,27 @@ import { useSite } from './SiteContext.jsx';
 
 const GA_ID = 'G-DCLB1EGJLW';
 
+let lastPagePath = '';
+
+function trackPageview(path) {
+  if (typeof window.gtag !== 'function') return;
+  if (lastPagePath === path) return;
+  lastPagePath = path;
+  window.gtag('event', 'page_view', {
+    send_to: GA_ID,
+    page_title: document.title,
+    page_location: window.location.href,
+    page_path: path,
+  });
+}
+
 function waitForGtag() {
   return new Promise((resolve) => {
     if (window.__MM_GTAG_READY) return resolve();
     const t = setTimeout(resolve, 4000);
-    const prev = window.__MM_GTAG_READY_CB;
     window.__MM_GTAG_READY_CB = () => {
       clearTimeout(t);
       resolve();
-      if (typeof prev === 'function') prev();
     };
   });
 }
@@ -41,8 +53,7 @@ function Analytics() {
   const { ready } = useSite();
   const { pathname, search } = useLocation();
   const [booted, setBooted] = useState(false);
-  const first = useRef(true);
-  const startPath = useRef(pathname + search);
+  const path = pathname + search;
 
   useEffect(() => {
     const failsafe = setTimeout(() => { hideBoot(); setBooted(true); }, 12000);
@@ -54,24 +65,17 @@ function Analytics() {
     let cancelled = false;
     Promise.all([waitForGtag(), waitForWindowLoad()]).then(() => {
       if (cancelled) return;
-      if (typeof window.gtag === 'function') {
-        window.gtag('config', GA_ID, { page_path: startPath.current });
-      }
+      trackPageview(path);
       hideBoot();
       setBooted(true);
     });
     return () => { cancelled = true; };
-  }, [ready, booted]);
+  }, [ready, booted, path]);
 
   useEffect(() => {
     if (!booted) return;
-    if (first.current) {
-      first.current = false;
-      return;
-    }
-    if (typeof window.gtag !== 'function') return;
-    window.gtag('config', GA_ID, { page_path: pathname + search });
-  }, [booted, pathname, search]);
+    trackPageview(path);
+  }, [booted, path]);
 
   return null;
 }
