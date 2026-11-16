@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link, NavLink, inShell } from './Link.jsx';
 import { useSite } from '../SiteContext.jsx';
+import SocialLinks from './SocialLinks.jsx';
 
 const enc = (p) => encodeURI(p);
 
@@ -93,10 +94,7 @@ function Footer() {
         <div>
           <img src={site.logo} alt={site.name} width="150" height="45" className="footer__logo" />
           <p>Keep your car running smoothly and safely with expert servicing. From oil changes to full inspections, we’ve got you covered.</p>
-          <p className="social">
-            <a href={site.social.facebook} rel="noopener noreferrer" target="_blank">Facebook</a> ·{' '}
-            <a href={site.social.instagram} rel="noopener noreferrer" target="_blank">Instagram</a>
-          </p>
+          <SocialLinks facebook={site.social?.facebook} instagram={site.social?.instagram} />
         </div>
         <div>
           <h4>Quick Links</h4>

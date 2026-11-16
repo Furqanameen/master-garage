@@ -1,5 +1,6 @@
 import { Link } from './Link.jsx';
 import { useSite } from '../SiteContext.jsx';
+import SocialLinks from './SocialLinks.jsx';
 
 /** Clickable NAP used in the footer, Contact page and About. */
 export function ContactDetails({ hours = true, mapEmbed = false }) {
@@ -18,15 +19,9 @@ export function ContactDetails({ hours = true, mapEmbed = false }) {
         <li><a href={`tel:${site.mobile}`}>📱 {site.mobileDisplay || site.mobile}</a></li>
         <li><a href={wa} target="_blank" rel="noopener noreferrer">💬 WhatsApp {site.mobileDisplay}</a></li>
         <li><a href={`mailto:${site.email}`}>✉️ {site.email}</a></li>
-        {site.social?.facebook ? (
-          <li>
-            <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">
-              Facebook
-            </a>
-          </li>
-        ) : null}
         {hours ? <li>🕘 {site.hours}</li> : null}
       </ul>
+      <SocialLinks facebook={site.social?.facebook} instagram={site.social?.instagram} />
       {mapEmbed ? (
         <div className="nap__map">
           <a
