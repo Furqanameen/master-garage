@@ -19,6 +19,21 @@ const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 
+const canonicalHost = (() => {
+  try { return new URL(config.siteUrl).hostname.toLowerCase(); }
+  catch { return 'mastermechanics.ae'; }
+})();
+
+app.use((req, res, next) => {
+  const host = (req.hostname || '').toLowerCase();
+  if (!host || host === 'localhost' || host === '127.0.0.1' || host === canonicalHost) return next();
+  if (host === `www.${canonicalHost}`) {
+    const pathq = req.originalUrl || '/';
+    return res.redirect(301, `${config.siteUrl}${pathq.startsWith('/') ? pathq : `/${pathq}`}`);
+  }
+  next();
+});
+
 // CSP is left to the reverse proxy/CDN because the page injects inline JSON-LD.
 app.use(helmet({
   contentSecurityPolicy: false,
@@ -66,6 +81,13 @@ const ownHost = new URL(config.siteUrl).host.replace(/^www\./, '');
 app.use('/wp-content', (req, res) => {
   if (fallbackHost === ownHost) return res.status(404).type('text/plain').send('Not found');
   res.redirect(302, config.mediaFallbackBase + '/wp-content' + req.url);
+});
+
+/* Bare SPA shell must not compete with the injected homepage. */
+app.get(['/index.html', '/index.htm'], (_req, res) => res.redirect(301, '/'));
+app.get('/', (req, res, next) => {
+  if (Object.prototype.hasOwnProperty.call(req.query, 's')) return res.redirect(301, '/');
+  next();
 });
 
 /* ---- built React app (hashed assets) ---- */
