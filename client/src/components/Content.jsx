@@ -18,18 +18,37 @@ export function ContactDetails({ hours = true, mapEmbed = false }) {
         <li><a href={`tel:${site.mobile}`}>📱 {site.mobileDisplay || site.mobile}</a></li>
         <li><a href={wa} target="_blank" rel="noopener noreferrer">💬 WhatsApp {site.mobileDisplay}</a></li>
         <li><a href={`mailto:${site.email}`}>✉️ {site.email}</a></li>
+        {site.social?.facebook ? (
+          <li>
+            <a href={site.social.facebook} target="_blank" rel="noopener noreferrer">
+              Facebook
+            </a>
+          </li>
+        ) : null}
         {hours ? <li>🕘 {site.hours}</li> : null}
       </ul>
       {mapEmbed ? (
         <div className="nap__map">
-          <iframe
-            title="Master Mechanics Garage on the map"
-            src={`https://www.google.com/maps?q=${encodeURIComponent(site.addressLine)}&ll=${site.geoLat || 24.9685316},${site.geoLng || 55.1922678}&z=16&output=embed`}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
-          <p><a href={site.mapUrl} target="_blank" rel="noopener noreferrer">Open map</a></p>
+          <a
+            className="nap__map-link"
+            href={site.mapUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open Master Mechanics Garage LLC on Google Maps"
+          >
+            <iframe
+              title="Master Mechanics Garage LLC on Google Maps"
+              src={`https://www.google.com/maps?q=${site.geoLat || 24.9685316},${site.geoLng || 55.1922678}&z=16&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              tabIndex={-1}
+            />
+          </a>
+          <p>
+            <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
+              Open garage location on Google Maps
+            </a>
+          </p>
         </div>
       ) : null}
     </div>

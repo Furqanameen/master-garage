@@ -20,12 +20,12 @@ export const site = {
   addressRegion: 'Dubai',
   addressCountry: 'AE',
   addressLine: 'Master Mechanics Garage LLC Warehouse No. 49, Building No. 3, Span Precast Compound 71 Street, Dubai Investment Park 2 (DIP 2) Dubai, United Arab Emirates',
-  mapUrl: 'https://rb.gy/g6j5r0',
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=Master+Mechanics+Garage+LLC+Warehouse+No.+49+Building+No.+3+Span+Precast+Compound+71+Street+Dubai+Investment+Park+2',
   geoLat: 24.9685316,
   geoLng: 55.1922678,
   hours: 'Monday – Saturday, 9 AM to 7 PM (Sunday closed)',
   social: {
-    facebook: 'https://www.facebook.com/profile.php?id=61565806588918&mibextid=ZbWKwL',
+    facebook: 'https://www.facebook.com/mastermechanics.ae',
     instagram: 'https://www.instagram.com/mastermechanics.ae/',
   },
 };
