@@ -60,10 +60,11 @@ api.post('/leads', leadLimiter, wrap(async (req, res) => {
     message: clean(b.message, 2000) || null,
     source_page: clean(b.source_page, 300) || null,
   };
-  if (lead.name.length < 2) return res.status(400).json({ error: 'Please enter your name.' });
-  if (!lead.phone && !lead.email) return res.status(400).json({ error: 'Please enter a phone number or email.' });
-  if (lead.phone && !/^[+\d][\d\s()-]{6,}$/.test(lead.phone)) return res.status(400).json({ error: 'Please enter a valid phone number.' });
-  if (lead.email && !/^\S+@\S+\.\S+$/.test(lead.email)) return res.status(400).json({ error: 'Please enter a valid email.' });
+  if (lead.name.length < 2) return res.status(400).json({ error: 'Name is required.' });
+  if (!lead.email) return res.status(400).json({ error: 'Email is required.' });
+  if (!lead.phone) return res.status(400).json({ error: 'Phone is required.' });
+  if (!/^[+\d][\d\s()-]{6,}$/.test(lead.phone)) return res.status(400).json({ error: 'Please enter a valid phone number.' });
+  if (!/^\S+@\S+\.\S+$/.test(lead.email)) return res.status(400).json({ error: 'Please enter a valid email.' });
 
   const id = await insertLead(lead);
   if (config.leadWebhookUrl) {
