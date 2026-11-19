@@ -62,7 +62,7 @@ export function BrandPage({ page }) {
         <Article content={{ ...c, sections: (c.sections || []).filter((s) => !/related/i.test(s.heading || '')) }} faq={page.faq} h1={page.h1 || page.title} bodyHtml={page.body_html} />
         <RelatedStrip links={related} title="More specialist makes" />
       </div>
-      <LeadForm defaultService={page.nav_label || ''} />
+      <LeadForm />
     </>
   );
 }
@@ -300,7 +300,7 @@ export function CareersIndex({ page }) {
         </div>
         {!jobs?.length && <p className="mt">No open roles right now. Send a CV via the <Link to="/contact/">contact page</Link> or WhatsApp.</p>}
       </div>
-      <LeadForm title="General application" apply defaultService="Job: general application" />
+      <LeadForm title="General application" apply />
     </>
   );
 }

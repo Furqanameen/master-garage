@@ -66,7 +66,7 @@ export default function DynamicPage() {
           </div>
           {page.body_html && page.path !== '/about/' ? <RelatedStrip links={related} /> : null}
           {page.path !== '/thank-you/' && (
-            <LeadForm defaultService={page.type === 'service' || page.type === 'brand' ? page.nav_label : ''} />
+            <LeadForm />
           )}
         </>
       );

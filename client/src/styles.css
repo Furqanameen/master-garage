@@ -178,6 +178,7 @@
 .mm-app .lead__form {display: grid; gap: 12px; grid-template-columns: 1fr 1fr;}
 .mm-app .lead__form label {display: grid; gap: 4px; font-size: .9rem; font-weight: 500;}
 .mm-app .lead__form label:nth-of-type(n+5), .mm-app .lead__form .btn, .mm-app .lead__form .form-msg {grid-column: 1 / -1;}
+.mm-app .lead__form textarea {min-height: 96px; resize: vertical;}
 .mm-app .lead__form input, .mm-app .lead__form select, .mm-app .lead__form textarea {font: inherit; padding: 11px 12px; border-radius: 10px; border: 1px solid #475569; background: #fff; color: var(--ink); width: 100%;}
 .mm-app .lead__form .btn {justify-self: start;}
 @media (max-width: 560px) {

@@ -61,7 +61,7 @@ export default function Home({ page }) {
           />
           <div>
             <h2 className="enquire__badge">{c.badge}</h2>
-            <LeadForm compact defaultService="AC Repair Service" title="" />
+            <LeadForm compact title="" />
           </div>
         </div>
       </section>

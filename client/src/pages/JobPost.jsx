@@ -28,7 +28,7 @@ export default function JobPost() {
         <p className="meta"><Link to="/careers/">All open roles</Link></p>
         <article className="prose" dangerouslySetInnerHTML={{ __html: job.body_html || `<p>${job.excerpt || ''}</p>` }} />
       </div>
-      <LeadForm apply title="Apply for this role" defaultService={`Job: ${job.title}`} />
+      <LeadForm apply title="Apply for this role" />
     </>
   );
 }
