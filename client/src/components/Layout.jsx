@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link, NavLink, inShell } from './Link.jsx';
 import { useSite } from '../SiteContext.jsx';
-import SocialLinks from './SocialLinks.jsx';
+import ContactActions, { PhoneIcon, WhatsAppIcon } from './SocialLinks.jsx';
 
 const enc = (p) => encodeURI(p);
 
@@ -70,8 +70,12 @@ function Header() {
 
         {site && (
           <div className="header__cta">
-            <a className="btn btn--sm btn--wa header__wa" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+            <a className="btn btn--sm btn--wa header__wa" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">
+              <WhatsAppIcon />
+              <span>WhatsApp</span>
+            </a>
             <a className="btn btn--sm header__phone" href={`tel:${site.mobile}`} aria-label={`Call ${site.mobile}`}>
+              <PhoneIcon />
               <span className="header__num">{site.mobile.replace('+971', '+971 ').replace(/(\d{2})(\d{3})(\d{4})$/, '$1 $2 $3')}</span>
               <span className="header__call">Call</span>
             </a>
@@ -94,7 +98,7 @@ function Footer() {
         <div>
           <img src={site.logo} alt={site.name} width="150" height="45" className="footer__logo" />
           <p>Keep your car running smoothly and safely with expert servicing. From oil changes to full inspections, we’ve got you covered.</p>
-          <SocialLinks facebook={site.social?.facebook} instagram={site.social?.instagram} />
+          <ContactActions site={site} variant="social" />
         </div>
         <div>
           <h4>Quick Links</h4>
@@ -121,13 +125,12 @@ function Footer() {
         </div>
         <div>
           <h4>Contact Information</h4>
+          <ContactActions site={site} className="contact-actions--stack" />
           <ul className="contact nap__list">
-            <li><a href={site.mapUrl} target="_blank" rel="noopener noreferrer">📍 {site.addressLine}</a></li>
-            <li><a href={`tel:${site.landline}`}>📞 {site.landlineDisplay}</a></li>
-            <li><a href={`tel:${site.mobile}`}>📱 {site.mobileDisplay || site.mobile}</a></li>
-            <li><a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp {site.mobileDisplay}</a></li>
-            <li><a href={`mailto:${site.email}`}>✉️ {site.email}</a></li>
-            <li>🕘 {site.hours}</li>
+            <li><a href={site.mapUrl} target="_blank" rel="noopener noreferrer">{site.addressLine}</a></li>
+            <li><a href={`tel:${site.landline}`}>{site.landlineDisplay}</a></li>
+            <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+            <li>{site.hours}</li>
           </ul>
         </div>
       </div>

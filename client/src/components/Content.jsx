@@ -1,27 +1,24 @@
 import { Link } from './Link.jsx';
 import { useSite } from '../SiteContext.jsx';
-import SocialLinks from './SocialLinks.jsx';
+import ContactActions from './SocialLinks.jsx';
 
 /** Clickable NAP used in the footer, Contact page and About. */
 export function ContactDetails({ hours = true, mapEmbed = false }) {
   const { site } = useSite();
   if (!site) return null;
-  const wa = `https://wa.me/${site.whatsapp}`;
   return (
     <div className="nap">
+      <ContactActions site={site} />
       <ul className="nap__list">
         <li>
           <a href={site.mapUrl} target="_blank" rel="noopener noreferrer">
-            📍 {site.addressLine}
+            {site.addressLine}
           </a>
         </li>
-        <li><a href={`tel:${site.landline}`}>📞 {site.landlineDisplay}</a></li>
-        <li><a href={`tel:${site.mobile}`}>📱 {site.mobileDisplay || site.mobile}</a></li>
-        <li><a href={wa} target="_blank" rel="noopener noreferrer">💬 WhatsApp {site.mobileDisplay}</a></li>
-        <li><a href={`mailto:${site.email}`}>✉️ {site.email}</a></li>
-        {hours ? <li>🕘 {site.hours}</li> : null}
+        <li><a href={`tel:${site.landline}`}>{site.landlineDisplay}</a></li>
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        {hours ? <li>{site.hours}</li> : null}
       </ul>
-      <SocialLinks facebook={site.social?.facebook} instagram={site.social?.instagram} />
       {mapEmbed ? (
         <div className="nap__map">
           <a

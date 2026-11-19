@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { api } from '../api.js';
 import { useSite } from '../SiteContext.jsx';
+import { WhatsAppIcon } from './SocialLinks.jsx';
 
 const empty = { name: '', email: '', phone: '', vehicle: '', message: '', website: '' };
 const EMAIL_OK = /^\S+@\S+\.\S+$/;
@@ -109,7 +110,12 @@ export default function LeadForm({
           <p>{apply
             ? 'Send your details and we will contact you on WhatsApp or phone. No need to attach a file here.'
             : 'Tell us about your car and we’ll confirm a time and an estimate. Prefer chat? Message us on WhatsApp.'}</p>
-          {site && <a className="btn btn--wa" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp us</a>}
+          {site && (
+            <a className="btn btn--wa lead__wa" href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer">
+              <WhatsAppIcon />
+              <span>WhatsApp us</span>
+            </a>
+          )}
         </div>
         {formEl}
       </div>
