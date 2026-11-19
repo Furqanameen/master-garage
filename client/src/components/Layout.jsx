@@ -98,7 +98,6 @@ function Footer() {
         <div>
           <img src={site.logo} alt={site.name} width="150" height="45" className="footer__logo" />
           <p>Keep your car running smoothly and safely with expert servicing. From oil changes to full inspections, we’ve got you covered.</p>
-          <ContactActions site={site} variant="social" />
         </div>
         <div>
           <h4>Quick Links</h4>

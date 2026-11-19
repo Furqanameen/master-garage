@@ -89,6 +89,9 @@
 .mm-app .hero__grid {grid-template-columns: 1fr;}
 }
 .mm-app .pagehero {background: var(--ink) var(--hero, none) center/cover; color: #cbd5e1; padding: 56px 0 44px; position: relative;}
+.mm-app .pagehero--compact {padding: 28px 0 22px;}
+.mm-app .pagehero--compact h1 {font-size: clamp(1.7rem, 4.5vw, 2.6rem);}
+.mm-app .pagehero--compact .pagehero__sub {font-size: 1.02rem;}
 .mm-app .pagehero::before {content: ''; position: absolute; inset: 0; background: rgba(15, 23, 42, .78);}
 .mm-app .pagehero .container {position: relative;}
 .mm-app .pagehero h1 {color: #fff; margin-bottom: .3em;}
@@ -190,6 +193,10 @@
 .mm-app .lead {background: var(--ink); color: #cbd5e1; padding: 56px 0; margin-top: 40px;}
 .mm-app .lead h2 {color: #fff; margin-top: 0;}
 .mm-app .lead__inner {display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: start;}
+.mm-app .lead--centered {background: #fff; color: var(--ink-2); padding: 28px 0 48px; margin-top: 0;}
+.mm-app .lead--centered h2 {color: var(--ink); text-align: center; margin: 0 0 .25em; font-size: clamp(1.45rem, 3vw, 2rem);}
+.mm-app .lead--centered > .lead__center > p {text-align: center; margin: 0 0 22px; color: var(--muted);}
+.mm-app .lead__center {width: min(680px, 100% - 32px); margin-inline: auto;}
 @media (max-width: 860px) {
 .mm-app .lead__inner {grid-template-columns: 1fr;}
 }
@@ -197,13 +204,25 @@
 .mm-app .lead__form label {display: grid; gap: 4px; font-size: .9rem; font-weight: 500;}
 .mm-app .lead__err {color: #b91c1c; font-size: .8rem; font-weight: 600;}
 .mm-app .lead .lead__err {color: #fca5a5;}
+.mm-app .lead--centered .lead__err {color: #b91c1c;}
+.mm-app .lead--centered .form-msg--ok {color: #15803d;}
+.mm-app .lead--centered .form-msg--error {color: #b91c1c;}
 .mm-app .lead__form label:nth-of-type(n+5), .mm-app .lead__form .btn, .mm-app .lead__form .form-msg {grid-column: 1 / -1;}
 .mm-app .lead__form textarea {min-height: 96px; resize: vertical;}
 .mm-app .lead__form input, .mm-app .lead__form select, .mm-app .lead__form textarea {font: inherit; padding: 11px 12px; border-radius: 10px; border: 1px solid #475569; background: #fff; color: var(--ink); width: 100%;}
 .mm-app .lead__field--err input {border-color: #dc2626;}
 .mm-app .lead__form .btn {justify-self: start;}
+@media (max-width: 640px) {
+.mm-app .lead--centered {padding: 12px 0 28px;}
+.mm-app .lead--centered > .lead__center > p {margin: 0 0 14px; font-size: .92rem;}
+.mm-app .lead--centered .lead__form {gap: 10px;}
+.mm-app .lead--centered .lead__form .btn {width: 100%; justify-self: stretch;}
+.mm-app .lead--centered .lead__form textarea {min-height: 72px;}
+.mm-app .lead--centered .lead__form input, .mm-app .lead--centered .lead__form textarea {padding: 10px 11px;}
+}
 @media (max-width: 560px) {
 .mm-app .lead__form {grid-template-columns: 1fr;}
+.mm-app .lead--centered .lead__form {grid-template-columns: 1fr 1fr;}
 }
 .mm-app .hp {position: absolute !important; left: -9999px; height: 0; width: 0; opacity: 0;}
 .mm-app .form-msg--ok {color: #86efac;}
@@ -251,6 +270,12 @@
 .mm-app .float-wa {right: 12px; bottom: 12px; width: 52px; height: 52px;}
 .mm-app .section {padding: 44px 0;}
 .mm-app .pagehero {padding: 40px 0 32px;}
+.mm-app .pagehero--compact {padding: 14px 0 12px;}
+}
+@media (max-width: 400px) {
+.mm-app .logo img {height: 38px;}
+.mm-app .header__wa, .mm-app .header__phone {padding: .4em .7em; font-size: .8rem;}
+.mm-app .contact-actions__btn {font-size: .88rem; padding: 11px 12px;}
 }
 @media (prefers-reduced-motion: reduce) {
 .mm-app .btn {transition: none;}

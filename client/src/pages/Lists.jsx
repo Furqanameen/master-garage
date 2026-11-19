@@ -240,19 +240,15 @@ export function GalleryPage({ page }) {
 
 export function BookingPage({ page }) {
   const related = page.content?.related_links || page.content?.related;
-  const c = page.content || {};
   return (
     <>
       <PageHero
         h1={page.h1 || 'Book an appointment'}
         subtitle={page.subtitle || 'Tell us about your car and we will confirm a time.'}
         kicker="Booking"
+        compact
       />
-      <div className="container contact-page">
-        {c.intro?.[0] ? <p className="lead-p">{c.intro[0]}</p> : null}
-        <ContactDetails />
-      </div>
-      <LeadForm title="Schedule Your Appointment" />
+      <LeadForm centered title="Send your booking request" />
       <RelatedStrip links={related} />
     </>
   );

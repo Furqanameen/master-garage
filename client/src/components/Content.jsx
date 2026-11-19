@@ -47,8 +47,8 @@ export function ContactDetails({ hours = true, mapEmbed = false }) {
   );
 }
 
-export const PageHero = ({ h1, subtitle, image, kicker }) => (
-  <section className="pagehero" style={image ? { '--hero': `url(${encodeURI(image)})` } : undefined}>
+export const PageHero = ({ h1, subtitle, image, kicker, compact = false }) => (
+  <section className={compact ? 'pagehero pagehero--compact' : 'pagehero'} style={image ? { '--hero': `url(${encodeURI(image)})` } : undefined}>
     <div className="container">
       {kicker && <p className="kicker">{kicker}</p>}
       <h1>{h1}</h1>

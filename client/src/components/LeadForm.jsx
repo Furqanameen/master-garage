@@ -33,6 +33,7 @@ export default function LeadForm({
   title = 'Schedule Your Appointment',
   compact = false,
   apply = false,
+  centered = false,
 }) {
   const { site } = useSite();
   const { pathname } = useLocation();
@@ -101,6 +102,18 @@ export default function LeadForm({
   );
 
   if (compact) return formEl;
+
+  if (centered) {
+    return (
+      <section className="lead lead--centered" id="booking">
+        <div className="lead__center">
+          <h2>{title}</h2>
+          <p>Name, email and phone are required. We’ll confirm your appointment shortly.</p>
+          {formEl}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="lead" id="booking">
