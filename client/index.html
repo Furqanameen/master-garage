@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0f172a" />
-    <!-- Google tag (gtag.js) — script loads once; page views are sent from App.jsx -->
+    <!-- Google Tag Manager -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -15,7 +15,13 @@
         window.__MM_GTAG_READY = true;
         if (typeof window.__MM_GTAG_READY_CB === 'function') window.__MM_GTAG_READY_CB();
       };
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-N4XZCW5J');
     </script>
+    <!-- Google tag (gtag.js) — loads once; SPA page views are sent from App.jsx -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DCLB1EGJLW" onload="window.__MM_onGtag()" onerror="window.__MM_onGtag()"></script>
     <style>
       #mm-boot {position: fixed; inset: 0; z-index: 99999; display: grid; place-items: center; background: #0f172a; transition: opacity .28s ease;}
@@ -30,6 +36,8 @@
     <!--SEO_HEAD-->
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4XZCW5J" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
     <div id="mm-boot" aria-busy="true" aria-live="polite" aria-label="Loading"><div class="mm-boot__spin"></div></div>
     <noscript><style>#mm-boot{display:none!important}</style></noscript>
     <div id="root" class="mm-app"><!--SSR_FALLBACK--></div>
