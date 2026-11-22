@@ -29,6 +29,13 @@ services:
       SITE_URL: http://localhost:4000
       MEDIA_FALLBACK_BASE: https://mastermechanics.ae
       LEAD_WEBHOOK_URL: ""
+      LEAD_EMAIL_TO: carcare@mastermechanics.ae, furqanbinameen@gmail.com
+      SMTP_HOST: mail.mastermechanics.ae
+      SMTP_PORT: "587"
+      SMTP_SECURE: "false"
+      SMTP_USER: carcare@mastermechanics.ae
+      SMTP_PASS: ""
+      SMTP_FROM: "Master Mechanics <carcare@mastermechanics.ae>"
       GEO_LAT: "24.9685316"
       GEO_LNG: "55.1922678"
       ADMIN_USER: admin

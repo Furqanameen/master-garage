@@ -2,6 +2,7 @@ import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
 import { site } from '../site.js';
 import { config } from '../config.js';
+import { sendLeadEmail } from '../mail.js';
 import {
   getPageByPath, getNav, getPost, listPosts, listFaqs, listGallery,
   listPagesByType, insertLead, postPath, listJobs, getJob,
@@ -67,6 +68,11 @@ api.post('/leads', leadLimiter, wrap(async (req, res) => {
   if (!/^\S+@\S+\.\S+$/.test(lead.email)) return res.status(400).json({ error: 'Please enter a valid email.' });
 
   const id = await insertLead(lead);
+  try {
+    await sendLeadEmail(lead);
+  } catch (err) {
+    console.error('[leads] email failed', err?.message || err);
+  }
   if (config.leadWebhookUrl) {
     fetch(config.leadWebhookUrl, {
       method: 'POST',

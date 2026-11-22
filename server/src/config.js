@@ -49,6 +49,18 @@ export const config = {
   geoLat: Number(process.env.GEO_LAT || '24.9685316'),
   geoLng: Number(process.env.GEO_LNG || '55.1922678'),
   leadWebhookUrl: process.env.LEAD_WEBHOOK_URL || '',
+  leadEmailTo: (process.env.LEAD_EMAIL_TO || 'carcare@mastermechanics.ae')
+    .split(/[,;]+/)
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean)
+    .join(', '),
+  smtpHost: process.env.SMTP_HOST || '',
+  smtpPort: Number(process.env.SMTP_PORT || 587),
+  smtpSecure: process.env.SMTP_SECURE === 'true',
+  smtpUser: process.env.SMTP_USER || '',
+  smtpPass: process.env.SMTP_PASS || '',
+  smtpFrom: process.env.SMTP_FROM || 'Master Mechanics <carcare@mastermechanics.ae>',
+  smtpTlsServername: process.env.SMTP_TLS_SERVERNAME || '',
   adminUser: process.env.ADMIN_USER || 'admin',
   adminPassword: process.env.ADMIN_PASSWORD || crypto.randomBytes(24).toString('base64url'),
   sessionSecret: process.env.SESSION_SECRET || crypto.randomBytes(32).toString('hex'),

@@ -11,6 +11,7 @@
     "db:reset": "node scripts/db-reset.js && node scripts/db-init.js && node seed/index.js",
     "media:download": "node scripts/download-media.js",
     "test:data": "node seed/check.js",
+    "test:lead-email": "node scripts/test-lead-email.js",
     "preflight": "node scripts/preflight.js"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
     "multer": "^2.5.0",
+    "nodemailer": "^6.10.1",
     "pg": "^8.13.1"
   }
 }
