@@ -1,5 +1,13 @@
 import { query } from './db.js';
 import { foldLookalikes } from './lib/html.js';
+import { enrichLocationPage } from './locationCopy.js';
+
+const HARD_REDIRECTS = {
+  '/car-service-centre-in-dubai-investment-park-dip-auto-workshop/': {
+    to_path: '/car-service-dubai-investment-park/',
+    status: 301,
+  },
+};
 
 const PAGE_COLS = `id, path, type, nav_label, in_menu, title, meta_description, h1, subtitle,
   hero_image, card_image, excerpt, content, body_html, faq, noindex, sort_order, updated_at`;
@@ -9,7 +17,7 @@ export async function getPageByPath(path) {
     `SELECT ${PAGE_COLS} FROM pages WHERE path = $1 AND published`,
     [path],
   );
-  return rows[0] || null;
+  return withPageExtras(rows[0] || null);
 }
 
 export async function listPagesByType(type) {
@@ -100,20 +108,27 @@ export async function getJob(slug, { includeInactive = false } = {}) {
   return rows[0] ? { ...rows[0], path: jobPath(rows[0]) } : null;
 }
 
+function withPageExtras(page) {
+  if (!page) return page;
+  if (page.type === 'location') return enrichLocationPage(page);
+  return page;
+}
+
 export async function sitemapEntries() {
   const [pages, posts, jobs] = await Promise.all([
-    query(`SELECT path, type, updated_at FROM pages WHERE published AND NOT noindex ORDER BY sort_order, id`),
-    query(`SELECT category_slug, slug, updated_at FROM posts WHERE published ORDER BY published_at DESC`),
+    query(`SELECT path, type, updated_at FROM pages WHERE published AND NOT noindex AND path <> '/car-service-centre-in-dubai-investment-park-dip-auto-workshop/' ORDER BY sort_order, id`),
+    query(`SELECT category_slug, slug, COALESCE(published_at, updated_at) AS lastmod FROM posts WHERE published ORDER BY published_at DESC`),
     query(`SELECT slug, updated_at FROM jobs WHERE published ORDER BY sort_order, id`),
   ]);
   return [
     ...pages.rows.map((r) => ({ path: r.path, type: r.type, lastmod: r.updated_at })),
-    ...posts.rows.map((r) => ({ path: postPath(r), type: 'post', lastmod: r.updated_at })),
+    ...posts.rows.map((r) => ({ path: postPath(r), type: 'post', lastmod: r.lastmod })),
     ...jobs.rows.map((r) => ({ path: jobPath(r), type: 'job', lastmod: r.updated_at })),
   ];
 }
 
 export async function findRedirect(path) {
+  if (HARD_REDIRECTS[path]) return HARD_REDIRECTS[path];
   const { rows } = await query('SELECT to_path, status FROM redirects WHERE from_path = $1', [path]);
   return rows[0] || null;
 }

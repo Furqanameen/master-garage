@@ -126,6 +126,11 @@ try {
      ON CONFLICT (from_path) DO UPDATE SET to_path=EXCLUDED.to_path, status=EXCLUDED.status`,
     ['/appointment/', '/booking/'],
   );
+  await client.query(
+    `INSERT INTO redirects (from_path, to_path, status) VALUES ($1,$2,301)
+     ON CONFLICT (from_path) DO UPDATE SET to_path=EXCLUDED.to_path, status=EXCLUDED.status`,
+    ['/car-service-centre-in-dubai-investment-park-dip-auto-workshop/', '/car-service-dubai-investment-park/'],
+  );
 
   await client.query('COMMIT');
   console.log(`✔ Seeded ${pages.length} pages, ${posts.length} posts, ${(jobs || []).length} jobs, ${faqs.length} FAQs, ${gallery.length} gallery images.`);

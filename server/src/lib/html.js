@@ -1,6 +1,17 @@
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
 export const escapeHtml = (s = '') => String(s).replace(/[&<>"']/g, (c) => ESC[c]);
 
+/** Drop leading WP hero headings so SSR does not emit a second H1. */
+export function stripDuplicateHero(html = '') {
+  let out = String(html);
+  for (let i = 0; i < 6; i += 1) {
+    const m = out.match(/^\s*<(h[1-6])\b[^>]*>[\s\S]*?<\/\1>/i);
+    if (!m) break;
+    out = out.slice(m[0].length);
+  }
+  return out.trim();
+}
+
 /** Percent-encode a path the same way WordPress does (lower-case hex), e.g. /blog/%d0%b0uto-service/ */
 export const encodePath = (p) =>
   encodeURI(p).replace(/%[0-9A-F]{2}/g, (m) => m.toLowerCase());

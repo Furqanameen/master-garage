@@ -1,10 +1,27 @@
 import { config } from './config.js';
 import { site } from './site.js';
-import { escapeHtml, encodePath } from './lib/html.js';
-import { getPageByPath, getPost, listPagesByType, getNav, postPath, listPosts, listFaqs, listJobs, getJob, jobPath } from './data.js';
+import { escapeHtml, encodePath, stripDuplicateHero } from './lib/html.js';
+import { getPageByPath, getPost, listPagesByType, getNav, postPath, listPosts, listFaqs, listGallery, listJobs, getJob, jobPath } from './data.js';
 import { foldLookalikes } from './lib/html.js';
+import mediaRedirects from './mediaRedirects.json' with { type: 'json' };
 
-const abs = (p) => (/^https?:\/\//.test(p) ? p : config.siteUrl + p);
+function publicUrl(p = '') {
+  if (!p) return p;
+  let path = p;
+  if (/^https?:\/\//.test(p)) {
+    try {
+      const u = new URL(p);
+      if (u.pathname.startsWith('/wp-content/')) path = u.pathname;
+      else return p;
+    } catch {
+      return p;
+    }
+  }
+  if (mediaRedirects[path]) return config.siteUrl + mediaRedirects[path];
+  return /^https?:\/\//.test(p) ? p : config.siteUrl + path;
+}
+
+const abs = (p) => publicUrl(p);
 const absPath = (p) => config.siteUrl + encodePath(p);
 const trunc = (s = '', n = 300) => (s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s);
 const stripTags = (h = '') => h.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
@@ -143,6 +160,21 @@ function pageLd(page) {
       ...(isSpec ? { brand: { '@type': 'Brand', name: page.nav_label || page.h1 } } : {}),
     });
   }
+  if (page.type === 'location') {
+    out.push({
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: page.h1 || page.title,
+      description: page.meta_description || undefined,
+      url: absPath(page.path),
+      serviceType: 'Automotive repair and servicing',
+      areaServed: {
+        '@type': 'Place',
+        name: page.nav_label || page.h1,
+      },
+      provider: providerRef(),
+    });
+  }
   if (page.path === '/booking/' || page.type === 'booking') {
     out.push({
       '@context': 'https://schema.org',
@@ -251,22 +283,22 @@ function postLd(post) {
 
 /* ---------- <head> injection ---------- */
 
-function headHtml({ title, description, canonicalPath, image, type = 'website', noindex = false, jsonLd = [], keywords }) {
-  const url = absPath(canonicalPath);
+function headHtml({ title, description, canonicalPath, image, type = 'website', noindex = false, jsonLd = [], keywords, omitCanonical = false }) {
+  const url = canonicalPath ? absPath(canonicalPath) : '';
   const img = abs(image || site.defaultOgImage);
   const imgType = /\.png(\?|$)/i.test(img) ? 'image/png' : 'image/jpeg';
   const lines = [
     `<title>${escapeHtml(title)}</title>`,
     description ? `<meta name="description" content="${escapeHtml(description)}">` : '',
     keywords ? `<meta name="keywords" content="${escapeHtml(keywords)}">` : '',
-    `<link rel="canonical" href="${escapeHtml(url)}">`,
+    !omitCanonical && url ? `<link rel="canonical" href="${escapeHtml(url)}">` : '',
     `<meta name="robots" content="${noindex ? 'noindex,follow' : 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1'}">`,
     `<meta property="og:locale" content="en_US">`,
     `<meta property="og:type" content="${type}">`,
     `<meta property="og:site_name" content="${escapeHtml(site.name)}">`,
     `<meta property="og:title" content="${escapeHtml(title)}">`,
     description ? `<meta property="og:description" content="${escapeHtml(description)}">` : '',
-    `<meta property="og:url" content="${escapeHtml(url)}">`,
+    url ? `<meta property="og:url" content="${escapeHtml(url)}">` : '',
     `<meta property="og:image" content="${escapeHtml(img)}">`,
     `<meta property="og:image:alt" content="${escapeHtml(site.defaultOgImageAlt)}">`,
     `<meta property="og:image:width" content="${site.defaultOgImageWidth}">`,
@@ -369,9 +401,14 @@ async function pageFallback(page) {
       const label = String(s.keywords || '').split(',')[0].trim() || s.nav_label || s.h1;
       return `<a href="${escapeHtml(encodePath(s.path))}">${escapeHtml(label)}</a>`;
     }));
-  } else if (page.type === 'blog_index') {
-    const posts = await listPosts();
-    body += li(posts.map((p) => `<a href="${escapeHtml(encodePath(p.path))}">${escapeHtml(p.title)}</a>`));
+  } else if (page.type === 'blog_index' || page.type === 'blog_category') {
+    const posts = await listPosts(c.category_slug);
+    body += posts.length
+      ? li(posts.map((p) => `<a href="${escapeHtml(encodePath(p.path))}">${escapeHtml(p.title)}</a>`))
+      : '<p>No articles in this category yet.</p>';
+  } else if (page.type === 'gallery') {
+    const imgs = await listGallery();
+    body += imgs.map((g) => `<figure><img src="${escapeHtml(g.image)}" alt="${escapeHtml(g.alt || site.name)}"><figcaption>${escapeHtml(g.alt || '')}</figcaption></figure>`).join('');
   } else if (page.type === 'careers_index') {
     const jobs = await listJobs();
     body += page.body_html || sectionsHtml(c);
@@ -400,7 +437,7 @@ async function pageFallback(page) {
     const about = { ...c, sections: (c.sections || []).filter((s) => !/contact/i.test(s.heading || '')) };
     body += sectionsHtml(about) + napFallbackHtml();
   } else {
-    body += page.body_html || sectionsHtml(c);
+    body += page.body_html ? stripDuplicateHero(page.body_html) : sectionsHtml(c);
     if (page.body_html) body += relatedHtml(c);
     body += faqHtml(page.faq);
   }
@@ -463,6 +500,10 @@ export async function resolveRoute(path) {
 async function resolvePage(path) {
   const page = await getPageByPath(path);
   if (!page) return notFound(path);
+  let faq = page.faq;
+  if (page.type === 'faq') {
+    faq = (await listFaqs()).map((f) => ({ q: f.question, a: f.answer }));
+  }
   return {
     status: 200,
     canonicalPath: page.path,
@@ -472,7 +513,7 @@ async function resolvePage(path) {
       canonicalPath: page.path,
       image: page.hero_image || page.card_image,
       noindex: page.noindex,
-      jsonLd: pageLd(page),
+      jsonLd: pageLd({ ...page, faq }),
       keywords: page.content?.keywords,
     }),
     fallback: await pageFallback(page),
@@ -483,7 +524,13 @@ function notFound(path = '/404/') {
   return {
     status: 404,
     canonicalPath: path,
-    head: headHtml({ title: `Page not found - ${site.shortName}`, description: '', canonicalPath: path, noindex: true }),
+    head: headHtml({
+      title: `Page not found - ${site.shortName}`,
+      description: '',
+      canonicalPath: path,
+      noindex: true,
+      omitCanonical: true,
+    }),
     fallback: '<main><h1>Page not found</h1><p><a href="/">Back to the homepage</a></p></main>',
   };
 }

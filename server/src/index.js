@@ -115,10 +115,17 @@ app.get('*', async (req, res, next) => {
       res.set('X-Frame-Options', 'DENY');
       res.set('Cache-Control', 'no-store, no-cache, must-revalidate');
       res.set('Referrer-Policy', 'no-referrer');
-      return res.status(200).type('html').send(html);
+      res.set('X-Robots-Tag', 'noindex, nofollow');
+      const head = '<meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://mastermechanics.ae/">';
+      return res.status(200).type('html').send(inject(html, head, ''));
     }
 
     const normal = normalisePath(req.path);
+
+    const pagedCategory = normal.match(/^\/blog\/category\/(.+)\/page\/\d+\/$/);
+    if (pagedCategory) {
+      return res.redirect(301, encodePath(`/blog/category/${pagedCategory[1]}/`));
+    }
 
     const redirect = await findRedirect(normal);
     if (redirect) return res.redirect(redirect.status, encodePath(redirect.to_path));

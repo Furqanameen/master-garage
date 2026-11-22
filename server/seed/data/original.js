@@ -277,6 +277,7 @@ pages.push({
 
 pages.push({
   path: '/car-service-centre-in-dubai-investment-park-dip-auto-workshop/', type: 'static', nav_label: null, sort_order: 11,
+  noindex: true,
   title: 'Get Started | Master Mechanics Garage LLC',
   meta_description: 'Choose spare parts and lubricants or the Master Mechanics workshop in Dubai Investment Park.',
   h1: 'Where Would You Like to Go?',
