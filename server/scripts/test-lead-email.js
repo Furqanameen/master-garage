@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import nodemailer from 'nodemailer';
-import { buildLeadEmail } from '../src/mail.js';
+import { buildLeadEmail, buildCustomerEmail } from '../src/mail.js';
 
 const lead = {
   name: 'Test Driver',
@@ -11,21 +11,31 @@ const lead = {
   source_page: '/booking/',
 };
 
-const mail = buildLeadEmail(lead);
-assert.match(String(mail.to), /carcare@mastermechanics\.ae/);
-assert.match(String(mail.to), /furqanbinameen@gmail.com/);
-assert.match(mail.subject, /Test Driver/);
-assert.equal(mail.replyTo, 'visitor@example.com');
-assert.match(mail.text, /visitor@example.com/);
-assert.match(mail.text, /\+971501234567/);
-assert.match(mail.html, /BMW, X5, 2025/);
+const staff = buildLeadEmail(lead);
+assert.match(String(staff.to), /carcare@mastermechanics\.ae/);
+assert.match(staff.subject, /Test Driver/);
+assert.match(staff.subject, /contact them shortly/i);
+assert.equal(staff.replyTo, 'visitor@example.com');
+assert.match(staff.html, /cid:mm-logo@mastermechanics/);
+assert.match(staff.html, /Please contact this customer shortly/);
+assert.match(staff.html, /visitor@example.com/);
+assert.match(staff.html, /\+971501234567/);
+assert.equal(staff.attachments?.[0]?.cid, 'mm-logo@mastermechanics');
+
+const customer = buildCustomerEmail(lead);
+assert.equal(customer.to, 'visitor@example.com');
+assert.equal(customer.subject, 'Hi thanks Test Driver, Our Team member will connect you soon:');
+assert.match(customer.html, /Welcome, Test Driver/);
+assert.match(customer.html, /advisor will contact you soon/);
+assert.match(customer.html, /cid:mm-logo@mastermechanics/);
+assert.match(customer.html, /BMW, X5, 2025/);
+assert.match(customer.text, /advisor will contact you soon/i);
+assert.equal(customer.attachments?.[0]?.cid, 'mm-logo@mastermechanics');
 
 const tx = nodemailer.createTransport({ jsonTransport: true });
-const info = await tx.sendMail(mail);
-const payload = JSON.parse(info.message);
-const addrs = payload.to.map((x) => x.address);
-assert.ok(addrs.includes('carcare@mastermechanics.ae'));
-assert.ok(addrs.includes('furqanbinameen@gmail.com'));
-assert.equal(payload.replyTo[0].address, 'visitor@example.com');
+const staffInfo = await tx.sendMail(staff);
+const custInfo = await tx.sendMail(customer);
+assert.ok(JSON.parse(staffInfo.message).to.some((x) => x.address === 'carcare@mastermechanics.ae'));
+assert.equal(JSON.parse(custInfo.message).to[0].address, 'visitor@example.com');
 
-console.log('lead email builds and addresses carcare@mastermechanics.ae');
+console.log('staff + customer thank-you emails build correctly');

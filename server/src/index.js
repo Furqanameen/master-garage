@@ -142,6 +142,9 @@ app.get('*', async (req, res, next) => {
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, _req, res, _next) => {
+  if (err?.type === 'entity.too.large' || err?.status === 413) {
+    return res.status(413).json({ error: 'request too large' });
+  }
   console.error(redact(err?.stack || err?.message || 'server_error'));
   res.status(500).json({ error: 'server_error' });
 });
