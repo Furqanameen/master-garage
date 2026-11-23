@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import DynamicPage from './pages/DynamicPage.jsx';
 import BlogPost from './pages/BlogPost.jsx';
 import JobPost from './pages/JobPost.jsx';
-import AdminApp from './admin/AdminApp.jsx';
-import { useSite } from './SiteContext.jsx';
+
+const AdminApp = lazy(() => import('./admin/AdminApp.jsx'));
 
 const GA_ID = 'G-DCLB1EGJLW';
 
@@ -23,58 +23,36 @@ function trackPageview(path) {
   });
 }
 
-function waitForGtag() {
-  return new Promise((resolve) => {
-    if (window.__MM_GTAG_READY) return resolve();
-    const t = setTimeout(resolve, 4000);
-    window.__MM_GTAG_READY_CB = () => {
-      clearTimeout(t);
-      resolve();
-    };
-  });
-}
-
-function waitForWindowLoad() {
-  return new Promise((resolve) => {
-    if (document.readyState === 'complete') return resolve();
-    window.addEventListener('load', resolve, { once: true });
-    setTimeout(resolve, 8000);
-  });
-}
-
 function hideBoot() {
   const el = document.getElementById('mm-boot');
   if (!el) return;
   el.classList.add('mm-boot--done');
-  setTimeout(() => el.remove(), 320);
+  setTimeout(() => el.remove(), 220);
 }
 
 function Analytics() {
-  const { ready } = useSite();
   const { pathname, search } = useLocation();
   const [booted, setBooted] = useState(false);
   const path = pathname + search;
 
-  useEffect(() => {
-    const failsafe = setTimeout(() => { hideBoot(); setBooted(true); }, 12000);
-    return () => clearTimeout(failsafe);
+  useLayoutEffect(() => {
+    hideBoot();
+    setBooted(true);
   }, []);
 
   useEffect(() => {
-    if (!ready || booted) return;
-    let cancelled = false;
-    Promise.all([waitForGtag(), waitForWindowLoad()]).then(() => {
-      if (cancelled) return;
-      trackPageview(path);
-      hideBoot();
-      setBooted(true);
-    });
-    return () => { cancelled = true; };
-  }, [ready, booted, path]);
-
-  useEffect(() => {
     if (!booted) return;
-    trackPageview(path);
+    if (window.__MM_GTAG_READY) {
+      trackPageview(path);
+      return;
+    }
+    const prev = window.__MM_GTAG_READY_CB;
+    window.__MM_GTAG_READY_CB = () => {
+      if (typeof prev === 'function') prev();
+      trackPageview(path);
+    };
+    const t = setTimeout(() => trackPageview(path), 4000);
+    return () => clearTimeout(t);
   }, [booted, path]);
 
   return null;
@@ -85,7 +63,14 @@ export default function App() {
     <>
       <Analytics />
       <Routes>
-      <Route path="/admin/*" element={<AdminApp />} />
+      <Route
+        path="/admin/*"
+        element={(
+          <Suspense fallback={<div className="container loading">Loading admin…</div>}>
+            <AdminApp />
+          </Suspense>
+        )}
+      />
       <Route
         path="*"
         element={(

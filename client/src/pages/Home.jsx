@@ -42,7 +42,16 @@ export default function Home({ page }) {
   }, [hash, navigate]);
   return (
     <>
-      <section className="hero hero--photo" style={{ '--hero': `url(${c.hero.image})` }}>
+      <section className="hero hero--photo">
+        <img
+          className="hero__bg"
+          src={c.hero.image}
+          alt=""
+          width="1200"
+          height="800"
+          fetchPriority="high"
+          decoding="async"
+        />
         <div className="container hero__copy">
           <h1>{page.h1}</h1>
           <p className="hero__sub">{c.hero.sub}</p>
@@ -58,6 +67,8 @@ export default function Home({ page }) {
             alt="Master Mechanics Garage workshop in Dubai Investment Park"
             width="640"
             height="400"
+            loading="lazy"
+            decoding="async"
           />
           <div>
             <h2 className="enquire__badge">{c.badge}</h2>

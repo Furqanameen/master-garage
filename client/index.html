@@ -4,43 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0f172a" />
-    <!-- Google Tag Manager -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-DCLB1EGJLW', { send_page_view: false });
-      window.__MM_GTAG_READY = false;
-      window.__MM_onGtag = function () {
-        window.__MM_GTAG_READY = true;
-        if (typeof window.__MM_GTAG_READY_CB === 'function') window.__MM_GTAG_READY_CB();
-      };
-      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-N4XZCW5J');
-    </script>
-    <!-- Google tag (gtag.js) — loads once; SPA page views are sent from App.jsx -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DCLB1EGJLW" onload="window.__MM_onGtag()" onerror="window.__MM_onGtag()"></script>
+    <title>Master Mechanics Garage – Car Service in Dubai Investment Park</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" />
+    </noscript>
     <style>
-      #mm-boot {position: fixed; inset: 0; z-index: 99999; display: grid; place-items: center; background: #0f172a; transition: opacity .28s ease;}
+      #mm-boot {position: fixed; inset: 0; z-index: 99999; display: grid; place-items: center; background: #0f172a; transition: opacity .2s ease;}
       #mm-boot.mm-boot--done {opacity: 0; pointer-events: none;}
       .mm-boot__spin {width: 44px; height: 44px; border: 3px solid rgba(255,255,255,.18); border-top-color: #e8590c; border-radius: 50%; animation: mmspin .7s linear infinite;}
       @keyframes mmspin {to {transform: rotate(360deg);}}
     </style>
-    <title>Master Mechanics Garage – Car Service in Dubai Investment Park</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <!--SEO_HEAD-->
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N4XZCW5J" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
     <div id="mm-boot" aria-busy="true" aria-live="polite" aria-label="Loading"><div class="mm-boot__spin"></div></div>
     <noscript><style>#mm-boot{display:none!important}</style></noscript>
     <div id="root" class="mm-app"><!--SSR_FALLBACK--></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.__MM_GTAG_READY = false;
+      window.__MM_onGtag = function () {
+        window.__MM_GTAG_READY = true;
+        if (typeof window.__MM_GTAG_READY_CB === 'function') window.__MM_GTAG_READY_CB();
+      };
+      function loadMmTags() {
+        if (window.__MM_TAGS_LOADED) return;
+        window.__MM_TAGS_LOADED = true;
+        var gtm = document.createElement('script');
+        gtm.async = true;
+        gtm.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-N4XZCW5J';
+        document.head.appendChild(gtm);
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-DCLB1EGJLW';
+        ga.onload = window.__MM_onGtag;
+        ga.onerror = window.__MM_onGtag;
+        document.head.appendChild(ga);
+        gtag('js', new Date());
+        gtag('config', 'G-DCLB1EGJLW', { send_page_view: false });
+      }
+      if ('requestIdleCallback' in window) requestIdleCallback(loadMmTags, { timeout: 2500 });
+      else setTimeout(loadMmTags, 1800);
+    </script>
   </body>
 </html>

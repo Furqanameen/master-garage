@@ -25,7 +25,7 @@ function Header() {
     <header className="header">
       <div className="container header__row">
         <Link to="/" className="logo" aria-label="Master Mechanics – home">
-          <img src={site?.logo || '/images/master-mechanics-garage-logo.png'} alt="Master Mechanics Garage LLC" width="160" height="48" />
+          <img src={site?.logo || '/images/master-mechanics-garage-logo.png'} alt="Master Mechanics Garage LLC" width="160" height="48" decoding="async" />
         </Link>
 
         <button className="burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}>
@@ -55,7 +55,7 @@ function Header() {
             <div className="dropdown__menu dropdown__menu--brands" onClick={closeMenus}>
               {nav?.brands.map((b) => (
                 <Link key={b.path} to={enc(b.path)} className="nav-brand">
-                  {b.logo ? <img src={b.logo} alt="" width="36" height="22" /> : null}
+                  {b.logo ? <img src={b.logo} alt="" width="36" height="22" loading="lazy" decoding="async" /> : null}
                   {b.label}
                 </Link>
               ))}
